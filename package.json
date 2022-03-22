@@ -1,0 +1,38 @@
+{
+  "name": "noads-news",
+  "version": "0.0.1",
+  "description": "Tired of ads on news sites? So am I. Here is a crawling and managing tool for news sites. Currently only SPON",
+  "main": "crawler.js",
+  "scripts": {
+    "crawl": "node --max-old-space-size=4096 crawler.js site -s idealo.de",
+    "crawl-single": "node --max-old-space-size=4096 crawler.js single -s idealo.de",
+    "knex": "node node_modules/knex/bin/cli.js",
+    "eslint": "node node_modules/eslint/bin/eslint.js ./**/*.js",
+    "eslint-fix": "node node_modules/eslint/bin/eslint.js ./**/*.js --fix"
+  },
+  "author": "Pieter Passmann",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "child-process-promise": "^2.2.1",
+    "dotenv": "^8.2.0",
+    "knex": "^0.95.10",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.0",
+    "object-hash": "^2.2.0",
+    "proxy-chain": "^0.4.6",
+    "puppeteer": "^5.5.0",
+    "puppeteer-extra": "^3.1.16",
+    "puppeteer-extra-plugin-stealth": "^2.6.6",
+    "redis": "^4.0.0-rc.1",
+    "rss-parser": "^3.12.0",
+    "uuid": "^8.3.2",
+    "yargs": "^15.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "sqlite3": "^4.2.0"
+  }
+}
