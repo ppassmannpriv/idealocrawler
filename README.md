@@ -1,6 +1,6 @@
-# Noads
+# idealo Crawler
 ## powered by puppeteer + chromium
-This is a demo repo that can crawl all headlines of SPON (spiegel.de - a German news site). It uses some basics in abstraction and uses models, some modules and a basic SQL implementation. This will run locally or in a ***production environment***.
+This is a crawler for idealo.de. It uses some basics in abstraction and uses models, some modules and a basic SQL implementation. This will run locally or in a ***production environment***.
 
 Check the package.json scripts node for some basic usage. Also read the code and stick to existing convetions and naming schemes and you'll be just fine! ES Lint runs too and will help you!
 
