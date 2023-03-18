@@ -68,8 +68,8 @@ class Browser {
         maxTotalBufferSize: 1024 * 1204 * 200,
       });
       /**
-             * Only accept the html for now
-             */
+       * Only accept the html for now
+       */
       page.setRequestInterception(true);
       page.on('request', async (request) => {
         const allowedTypes = [

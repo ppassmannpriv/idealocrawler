@@ -31,12 +31,13 @@ const Response = require('./modules/response');
 // dump dump dump / debugging zone
 (async () => {
   await queue.init();
-  await queue.enqueue('https://www.idealo.de/mvc/CategoryData/results/category/19194?pageIndex=0&sortKey=DEFAULT&onlyNew=false&onlyBargain=false&onlyAvailable=false', 'category');
+  await queue.enqueue('https://de.mydirtyhobby.com/profil/119287782-Emmi-Hill/videos/mostseen', 'category');
   // await queue.enqueue('https://www.spiegel.de', 'root');
 })();
 
 // INIT BROWSER
 const Browser = require('./modules/browser');
+const Video = require('./models/video');
 
 const browser = new Browser();
 browser.initialize().then(async () => {
@@ -48,23 +49,16 @@ browser.fetchEventEmitter.on('responseRecieved', async (data) => {
   const responseData = await response.parse();
 
   if (data.request.type === 'root') {
-    responseData.rssLinks.forEach(async (link) => {
-      await queue.enqueue(link, 'rss');
-    });
-    responseData.resortLinks.forEach(async (link) => {
-      await queue.enqueue(link, 'resort');
-    });
   }
   if (responseData && data.request.type === 'category') {
     if (responseData.followingCategoryPage) await queue.enqueue(responseData.followingCategoryPage, 'category');
-    responseData.productLinks.forEach(async (link) => {
-      await queue.enqueue(link, 'product');
+    responseData.videoLinks.forEach(async (link) => {
+      await queue.enqueue(link, 'video');
     });
   }
-  if (responseData && data.request.type === 'article') {
-    responseData.source = 1;
-    // const article = new Article(responseData);
-    // article.save();
+  if (responseData && data.request.type === 'video') {
+    const video = new Video(responseData);
+    video.save();
   }
 
   browser.fetchContent(await queue.next()).catch((error) => global.utils.error(error));

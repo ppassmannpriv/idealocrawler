@@ -2,21 +2,25 @@
 
 class Category {
   async parse(response) {
-    const json = await response.json();
-    const productLinks = this.extractLinks(json);
-    const followingCategoryPage = json.categoryPagination.nextPageAjaxLink;
+    const html = await response.text();
+    const videoLinks = this.extractLinks(html);
+    const nextPage = this.extractPagination(html);
+    const followingCategoryPage = nextPage;
 
-    return { productLinks, followingCategoryPage };
+    return { videoLinks, followingCategoryPage };
   }
 
-  extractLinks(json) {
-    const links = json.categoryJsonResults.entries.map((entry) => entry.link.productLink.href);
-
-    return links;
+  extractPagination(html) {
+    const regex = /pagination.+?defaultRoute.+?(?<defaultRoute>\/profil[^\$]*)\$.+?activePage\D+?(?<active>\d).+?count\D+?(?<count>\d)/gmxui;
+    const pagination = regex.exec(html)?.groups;
+    if (pagination?.active < pagination?.count) {
+      return pagination.defaultRoute + (parseInt(pagination.active, 10) + 1);
+    }
+    return null;
   }
 
-  extractPrevLink(html) {
-    const regex = /<link[^>]+?rel="prev"[^>]+?href="(?<prev>[^"]+?)"[^>]*>/iusg;
+  extractLinks(html) {
+    const regex = /videos.+?(clickAction.+?href":"(?<videoHref>[^"]*?)")/gmxui;
     const prevLink = regex.exec(html)?.groups?.prev;
 
     return prevLink;
