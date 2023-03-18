@@ -31,7 +31,8 @@ const Response = require('./modules/response');
 // dump dump dump / debugging zone
 (async () => {
   await queue.init();
-  await queue.enqueue('https://de.mydirtyhobby.com/profil/119287782-Emmi-Hill/videos/mostseen', 'category');
+  await queue.enqueue('https://de.mydirtyhobby.com/profil/119287782-Emmi-Hill/videos/mostseen', 'profile');
+  console.log(queue)
   // await queue.enqueue('https://www.spiegel.de', 'root');
 })();
 
@@ -50,8 +51,8 @@ browser.fetchEventEmitter.on('responseRecieved', async (data) => {
 
   if (data.request.type === 'root') {
   }
-  if (responseData && data.request.type === 'category') {
-    if (responseData.followingCategoryPage) await queue.enqueue(responseData.followingCategoryPage, 'category');
+  if (responseData && data.request.type === 'profile') {
+    if (responseData.followingProfilePage) await queue.enqueue(responseData.followingProfilePage, 'profile');
     responseData.videoLinks.forEach(async (link) => {
       await queue.enqueue(link, 'video');
     });

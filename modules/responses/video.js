@@ -15,7 +15,7 @@ class Video {
   buildCommentsJson(html) {
     let json = null;
     try {
-      const jsonRegex = /"items":(?<comments>.*),"actionToComment":/gmxui;
+      const jsonRegex = /"items":(?<comments>.*),"actionToComment":/gmui;
       json = JSON.parse(html.match(jsonRegex)?.groups?.comments);
     } catch (error) {
       json = [{

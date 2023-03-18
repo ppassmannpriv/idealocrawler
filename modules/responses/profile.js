@@ -1,17 +1,17 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["extractLinks", "extractPrevLink"] }] */
 
-class Category {
+class Profile {
   async parse(response) {
     const html = await response.text();
     const videoLinks = this.extractLinks(html);
     const nextPage = this.extractPagination(html);
-    const followingCategoryPage = nextPage;
+    const followingProfilePage = nextPage;
 
-    return { videoLinks, followingCategoryPage };
+    return { videoLinks, followingProfilePage };
   }
 
   extractPagination(html) {
-    const regex = /pagination.+?defaultRoute.+?(?<defaultRoute>\/profil[^\$]*)\$.+?activePage\D+?(?<active>\d).+?count\D+?(?<count>\d)/gmxui;
+    const regex = /pagination.+?defaultRoute.+?(?<defaultRoute>\/profil[^\$]*)\$.+?activePage\D+?(?<active>\d).+?count\D+?(?<count>\d)/gmui
     const pagination = regex.exec(html)?.groups;
     if (pagination?.active < pagination?.count) {
       return pagination.defaultRoute + (parseInt(pagination.active, 10) + 1);
@@ -20,11 +20,11 @@ class Category {
   }
 
   extractLinks(html) {
-    const regex = /videos.+?(clickAction.+?href":"(?<videoHref>[^"]*?)")/gmxui;
+    const regex = /videos.+?(clickAction.+?href":"(?<videoHref>[^"]*?)")/gmui;
     const prevLink = regex.exec(html)?.groups?.prev;
 
     return prevLink;
   }
 }
 
-module.exports = Category;
+module.exports = Profile;
