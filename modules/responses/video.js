@@ -8,7 +8,7 @@ class Video {
       source: 1,
       comments,
       raw: comments,
-      url: response.url()
+      url: response.url(),
     };
   }
 

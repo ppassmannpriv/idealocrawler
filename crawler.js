@@ -32,7 +32,7 @@ const Response = require('./modules/response');
 (async () => {
   await queue.init();
   await queue.enqueue('https://de.mydirtyhobby.com/profil/119287782-Emmi-Hill/videos/mostseen', 'profile');
-  console.log(queue)
+  console.log(queue);
   // await queue.enqueue('https://www.spiegel.de', 'root');
 })();
 

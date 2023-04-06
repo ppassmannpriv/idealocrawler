@@ -11,7 +11,7 @@ class Profile {
   }
 
   extractPagination(html) {
-    const regex = /pagination.+?defaultRoute.+?(?<defaultRoute>\/profil[^\$]*)\$.+?activePage\D+?(?<active>\d).+?count\D+?(?<count>\d)/gmui
+    const regex = /pagination.+?defaultRoute.+?(?<defaultRoute>\/profil[^\$]*)\$.+?activePage\D+?(?<active>\d).+?count\D+?(?<count>\d)/gmui;
     const pagination = regex.exec(html)?.groups;
     if (pagination?.active < pagination?.count) {
       return pagination.defaultRoute + (parseInt(pagination.active, 10) + 1);
