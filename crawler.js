@@ -32,8 +32,6 @@ const Response = require('./modules/response');
 (async () => {
   await queue.init();
   await queue.enqueue('https://de.mydirtyhobby.com/profil/119287782-Emmi-Hill/videos/mostseen', 'profile');
-  console.log(queue);
-  // await queue.enqueue('https://www.spiegel.de', 'root');
 })();
 
 // INIT BROWSER
@@ -49,18 +47,18 @@ browser.fetchEventEmitter.on('responseRecieved', async (data) => {
   const response = new Response(data.request.type, data.response);
   const responseData = await response.parse();
 
-  if (data.request.type === 'root') {
-  }
+  // if (data.request.type === 'root') {
+  // }
   if (responseData && data.request.type === 'profile') {
     if (responseData.followingProfilePage) await queue.enqueue(responseData.followingProfilePage, 'profile');
     responseData.videoLinks.forEach(async (link) => {
-      await queue.enqueue(link, 'video');
+      await queue.enqueue(`https://de.mydirtyhobby.com${link.split('\\').join('')}`, 'video');
     });
   }
   if (responseData && data.request.type === 'video') {
     const video = new Video(responseData);
     video.save();
   }
-
+  await global.utils.delay(10000);
   browser.fetchContent(await queue.next()).catch((error) => global.utils.error(error));
 });

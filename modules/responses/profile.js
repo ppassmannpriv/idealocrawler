@@ -1,4 +1,4 @@
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["extractLinks", "extractPrevLink"] }] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["extractLinks", "extractPagination"] }] */
 
 class Profile {
   async parse(response) {
@@ -21,9 +21,12 @@ class Profile {
 
   extractLinks(html) {
     const regex = /videos.+?(clickAction.+?href":"(?<videoHref>[^"]*?)")/gmui;
-    const prevLink = regex.exec(html)?.groups?.prev;
-
-    return prevLink;
+    const links = [];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const match of html.matchAll(regex)) {
+      links.push(match?.groups?.videoHref);
+    }
+    return links;
   }
 }
 

@@ -1,4 +1,4 @@
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["buildArticleEntity"] }] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["buildArticleEntity", "buildCommentsJson"] }] */
 
 class Video {
   async parse(response) {
