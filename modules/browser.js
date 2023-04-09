@@ -47,7 +47,7 @@ class Browser {
       '--single-process',
     ];
     // args.push('--proxy-server=http://127.0.0.1:' + global.carouselPort);
-    const headless = false;
+    const headless = true;
     return puppeteer.launch({ headless, args });
   }
 

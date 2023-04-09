@@ -24,6 +24,9 @@ queue.eventEmitter.on('queueEndReached', async () => {
 
 // INIT RESPONSE
 const Response = require('./modules/response');
+const C = require('./modules/responses/comment');
+
+const Comment = new C();
 
 // INIT PERSISTENCE
 // const Article = require('./models/article');
@@ -58,6 +61,9 @@ browser.fetchEventEmitter.on('responseRecieved', async (data) => {
   if (responseData && data.request.type === 'video') {
     const video = new Video(responseData);
     video.save();
+    video?.comments.forEach((comment) => {
+      Comment.parse(comment, video.source_identifier);
+    });
   }
   await global.utils.delay(10000);
   browser.fetchContent(await queue.next()).catch((error) => global.utils.error(error));
