@@ -5,8 +5,7 @@ exports.up = (knex) => knex.schema
     table.string('source_identifier').notNullable();
     table.string('unique_id').unique().notNullable();
     table.index('unique_id');
-    table.text('comments', 'longtext');
-    table.string('url');
+    table.string('url').unique().notNullable();
     table.json('raw');
     table.timestamps();
   });

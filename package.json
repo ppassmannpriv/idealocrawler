@@ -13,6 +13,7 @@
   "author": "Pieter Passmann",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.3.5",
     "cheerio": "^1.0.0-rc.10",
     "child-process-promise": "^2.2.1",
     "dotenv": "^8.2.0",

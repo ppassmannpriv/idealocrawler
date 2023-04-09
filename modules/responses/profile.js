@@ -13,7 +13,7 @@ class Profile {
   extractPagination(html) {
     const regex = /pagination.+?defaultRoute.+?(?<defaultRoute>\/profil[^\$]*)\$.+?activePage\D+?(?<active>\d).+?count\D+?(?<count>\d)/gmui;
     const pagination = regex.exec(html)?.groups;
-    if (pagination?.active < pagination?.count) {
+    if (parseInt(pagination?.active, 10) < parseInt(pagination?.count, 10)) {
       return pagination.defaultRoute + (parseInt(pagination.active, 10) + 1);
     }
     return null;

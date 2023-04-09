@@ -8,7 +8,6 @@ exports.up = (knex) => knex.schema
     table.string('unique_id').unique().notNullable();
     table.index('unique_id');
     table.text('content', 'longtext');
-    table.string('url');
     table.json('raw');
     table.timestamps();
   });
