@@ -102,7 +102,7 @@ class Browser {
 
         await global.utils.delay(delay);
         if (global.blockedCounter > 4) {
-          global.utils.logInfo('Restarting browser.');
+          global.utils.log('Restarting browser.');
           this.instance.browser.emit('restartBrowser', request);
         } else {
           this.instance.browser.emit('blockedRequest', request);
@@ -114,7 +114,7 @@ class Browser {
       }
       if (responseStatus === 404) {
         this.instance.browser.emit('pageNotFound');
-        global.utils.logInfo('Request resulted in 404 - Page not found.');
+        global.utils.log('Request resulted in 404 - Page not found.');
       }
     } catch (error) {
       global.utils.log(`${global.requestCounter} EXCEPTION: ${error.message}`);

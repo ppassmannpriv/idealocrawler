@@ -18,7 +18,6 @@ class Queue {
   async createRedisConnection() {
     const redisClient = redis.createClient({
       url: process.env.REDISHOST,
-      post: '39072',
       password: process.env.REDISPASSWORD,
     });
     redisClient.on('error', (err) => global.utils.log('Redis Client Error', err));
