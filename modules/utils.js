@@ -12,6 +12,19 @@ class Utils {
     return `[${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}]`;
   }
 
+  deUmlaut(value) {
+    return value.toLowerCase()
+      .replace(/ä/g, 'ae')
+      .replace(/ö/g, 'oe')
+      .replace(/ü/g, 'ue')
+      .replace(/ß/g, 'ss')
+      .replace(/ /g, '-')
+      .replace(/\./g, '')
+      .replace(/,/g, '')
+      .replace(/\(/g, '')
+      .replace(/\)/g, '');
+  }
+
   /**
      * Custom logging function
      * @param str

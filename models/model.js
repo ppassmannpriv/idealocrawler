@@ -5,7 +5,9 @@ const DB = require('../modules/database');
 class Model {
   constructor(entity) {
     Object.assign(this, entity);
-    this.unique_id = hash(entity);
+    const exclude = new Set(['created_at', 'updated_at', 'raw']);
+    const cleanedEntity = Object.fromEntries(Object.entries(this).filter((e) => !exclude.has(e[0])));
+    this.unique_id = hash(cleanedEntity);
   }
 
   save() {

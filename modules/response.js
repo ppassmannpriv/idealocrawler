@@ -1,13 +1,13 @@
 const Root = require('./responses/root');
-const Category = require('./responses/category');
-const Product = require('./responses/product');
+const Profile = require('./responses/profile');
+const Video = require('./responses/video');
 
 class Response {
   constructor(type, puppeteerResponse) {
     this.classMap = {
       root: new Root(),
-      category: new Category(),
-      product: new Product(),
+      profile: new Profile(),
+      video: new Video(),
     };
     this.type = type;
     this.response = puppeteerResponse;

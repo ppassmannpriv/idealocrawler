@@ -9,7 +9,7 @@ let proxy = renewProxy();
 
 module.exports.forceRenewProxy = () => {
   proxy = renewProxy();
-  utils.logInfo(global.store, `Proxy was renewed: ${proxy}`);
+  utils.log(global.store, `Proxy was renewed: ${proxy}`);
 };
 
 module.exports.initServer = (port) => {
@@ -17,14 +17,14 @@ module.exports.initServer = (port) => {
     port,
     verbose: false,
     prepareRequestFunction: () => {
-      utils.logInfo(global.store, `Prepared request with proxy: ${proxy}`);
+      utils.log(global.store, `Prepared request with proxy: ${proxy}`);
       return {
         upstreamProxyUrl: proxy,
       };
     },
   });
   server.listen(() => {
-    utils.logInfo(global.store, `Proxy server is listening on port ${server.port}`);
+    utils.log(global.store, `Proxy server is listening on port ${server.port}`);
   });
 
   server.on('requestFailed', ({ request, error }) => {
